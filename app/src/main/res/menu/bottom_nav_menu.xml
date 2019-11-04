@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_dashboard" />
+
+    <item
+        android:id="@+id/navigation_portal"
+        android:icon="@drawable/ic_undraw_gaming_6oy3"
+        android:title="@string/portal" />
+
+    <item
+        android:id="@+id/navigation_riwayat"
+        android:icon="@drawable/ic_history_black_24dp"
+        android:title="@string/riwayat" />
+    <item
+        android:id="@+id/navigation_bantuan"
+        android:icon="@drawable/ic_help_black_24dp"
+        android:title="@string/bantuan" />
+
+</menu>
