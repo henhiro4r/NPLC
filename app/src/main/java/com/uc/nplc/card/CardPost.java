@@ -1,55 +1,51 @@
 package com.uc.nplc.card;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.uc.nplc.R;
-import com.uc.nplc.model.Bantuan;
+import com.uc.nplc.model.Post;
 import java.util.ArrayList;
 
-public class CardBantuan extends RecyclerView.Adapter<CardBantuan.CardViewViewHolder>{
+public class CardPost extends RecyclerView.Adapter<CardPost.CardViewViewHolder>{
 
     private Context context;
-    private ArrayList<Bantuan> listBantuan;
+    private ArrayList<Post> listPost;
 
-    private ArrayList<Bantuan> getListBantuan() {
-        return listBantuan;
+    private ArrayList<Post> getListPost() {
+        return listPost;
     }
-    public void setListBantuan(ArrayList<Bantuan> listBantuan) {
-        this.listBantuan = listBantuan;
+    public void setListPost(ArrayList<Post> listPost) {
+        this.listPost = listPost;
     }
-    public CardBantuan(Context context) {
+    public CardPost(Context context) {
         this.context = context;
     }
 
     @NonNull
     @Override
-    public CardBantuan.CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CardPost.CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_bantuan, parent, false);
-        return new CardBantuan.CardViewViewHolder(view);
+        return new CardPost.CardViewViewHolder(view);
     }
 
     @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(@NonNull CardBantuan.CardViewViewHolder holder, int position) {
-        Bantuan b = getListBantuan().get(position);
+    public void onBindViewHolder(@NonNull CardPost.CardViewViewHolder holder, int position) {
+        Post b = getListPost().get(position);
         holder.txt_judul.setText(b.getJudul());
         holder.txt_des.setText(b.getDes());
     }
 
     @Override
     public int getItemCount() {
-        return getListBantuan().size();
+        return getListPost().size();
     }
 
     class CardViewViewHolder extends RecyclerView.ViewHolder{

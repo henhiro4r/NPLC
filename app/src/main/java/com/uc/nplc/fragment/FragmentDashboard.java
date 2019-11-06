@@ -1,4 +1,4 @@
-package com.uc.nplc;
+package com.uc.nplc.fragment;
 
 
 import android.Manifest;
@@ -31,6 +31,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.uc.nplc.Login;
+import com.uc.nplc.PlayScanner;
+import com.uc.nplc.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,14 +53,14 @@ public class FragmentDashboard extends Fragment {
         // Required empty public constructor
     }
 
-    SharedPreferences userPref, phonePref;
-    SharedPreferences.Editor userEditor, phoneEditor;
+    SharedPreferences userPref;
+    SharedPreferences.Editor userEditor;
     RequestQueue requestQueue;
 
     private ProgressDialog pd;
     private AlphaAnimation klik = new AlphaAnimation(1F, 0.6F);
     ImageView logout, main, refresh;
-    TextView txtImei, txt_tim;
+    TextView txt_tim;
 
     String idTim = "";
 
@@ -66,9 +69,6 @@ public class FragmentDashboard extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
-        phonePref = getActivity().getSharedPreferences("phone", getActivity().MODE_PRIVATE);
-        phoneEditor = phonePref.edit();
 
         userPref = getActivity().getSharedPreferences("user", getActivity().MODE_PRIVATE);
         userEditor = userPref.edit();
@@ -82,7 +82,7 @@ public class FragmentDashboard extends Fragment {
         //txtImei.setText(phonePref.getString("imei","-"));
         idTim = userPref.getString("id","-");
 
-        txt_tim.setText("Hi, Tim "+userPref.getString("nama","-")+"!");
+        txt_tim.setText("Hi, Tim "+userPref.getString("name","-")+"!");
 
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +90,6 @@ public class FragmentDashboard extends Fragment {
                 v.startAnimation(klik);
             }
         });
-
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +136,6 @@ public class FragmentDashboard extends Fragment {
             public void onClick(View v) {
                 v.startAnimation(klik);
                 Intent i = new Intent(getActivity(), PlayScanner.class);
-                //i.putExtra("idtrans", idtrans);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
                 getActivity().finish();
@@ -149,7 +147,7 @@ public class FragmentDashboard extends Fragment {
 
     public void logout(String id_tim){
         requestQueue = Volley.newRequestQueue(getActivity());
-        String url = "https://arjekindonesia.com/webservice_nplc/logout.php";
+        String url = "https://7thnplc.wowrackcustomers.com/webservice/logout.php";
         Map<String, String> params = new HashMap<>();
         params.put("id", id_tim);
         JSONObject parameters = new JSONObject(params);
@@ -158,45 +156,32 @@ public class FragmentDashboard extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        String message = null;
                         try {
-                            JSONArray hasil = null;
-                            try {
-                                hasil = response.getJSONArray("out");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            for (int i = 0; i < hasil.length(); i++) {
-                                JSONObject jsonObject = hasil.getJSONObject(i);
-                                String hsl = jsonObject.getString("msg");
-
-                                if(hsl.equalsIgnoreCase("out_ok")){
-                                    showMessage("Terima kasih telah bermain.");
-                                    userEditor.putString("id","-");
-                                    userEditor.putString("nama","-");
-                                    userEditor.putString("imei","-");
-                                    userEditor.putString("coach","-");
-                                    userEditor.putString("point","-");
-                                    userEditor.commit();
-                                    Intent in = new Intent(getActivity(), Login.class);
-                                    in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(in);
-                                    getActivity().overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                        getActivity().finishAffinity();
-                                    }else{
-                                        ActivityCompat.finishAffinity(getActivity());
-                                    }
-
-                                }else if(hsl.equalsIgnoreCase("out_no")){
-                                    showMessage("Keluar dari apps gagal! Silahkan coba lagi!");
-
-                                }
-                            }
-                            pd.cancel();
+                            message = response.getString("out");
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            pd.cancel();
                         }
+                        if(message.equalsIgnoreCase("out_ok")){
+                            showMessage("Terima kasih telah bermain.");
+                            userEditor.putString("id","-");
+                            userEditor.putString("name","-");
+                            userEditor.putString("point","-");
+                            userEditor.commit();
+                            Intent in = new Intent(getActivity(), Login.class);
+                            in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(in);
+                            getActivity().overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                getActivity().finishAffinity();
+                            }else{
+                                ActivityCompat.finishAffinity(getActivity());
+                            }
+
+                        }else if(message.equalsIgnoreCase("out_no")){
+                            showMessage("Keluar dari apps gagal! Silahkan coba lagi!");
+                        }
+                        pd.cancel();
                     }
                 },
                 new Response.ErrorListener() {

@@ -1,4 +1,4 @@
-package com.uc.nplc;
+package com.uc.nplc.fragment;
 
 
 import android.app.ProgressDialog;
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 
 import com.android.volley.RequestQueue;
+import com.uc.nplc.R;
 
 
 /**

@@ -1,8 +1,7 @@
-package com.uc.nplc;
+package com.uc.nplc.fragment;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -14,9 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.widget.AdapterView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,9 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.uc.nplc.card.CardBantuan;
+import com.uc.nplc.R;
 import com.uc.nplc.card.CardHistory;
-import com.uc.nplc.model.Bantuan;
 import com.uc.nplc.model.History;
 
 import org.json.JSONArray;
@@ -41,51 +38,49 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentBantuan extends Fragment {
+public class FragmentHistory extends Fragment {
 
 
-    public FragmentBantuan() {
+    public FragmentHistory() {
         // Required empty public constructor
     }
 
-    private AlphaAnimation klik = new AlphaAnimation(1F, 0.6F);
     RequestQueue requestQueue;
-    String hsl = "", id = "", judul = "", des = "", updated = "", userid = "";
+    String hsl = "", idHis = "", idPos = "", hMy = "", idVs = "", hVs = "", created = "", userid = "";
 
-    ArrayList<Bantuan> listBantuan = new ArrayList<>();
-    ArrayList<Bantuan> lb = new ArrayList<>();
-    RecyclerView rv_bantuan;
+    ArrayList<History> listHistory = new ArrayList<>();
+    RecyclerView rv_history;
     SharedPreferences userPref;
     ProgressBar progBar;
-
+    TextView txtTidakAda;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View v = inflater.inflate(R.layout.fragment_bantuan, container, false);
-
+        final View v =  inflater.inflate(R.layout.fragment_history, container, false);
         userPref = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         userid = userPref.getString("id","-");
-        rv_bantuan = v.findViewById(R.id.rv_fr_bantuan);
-
+        rv_history = v.findViewById(R.id.rv_fr_history);
 
         return v;
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
-        loadBantuan();
+        loadHistory(userid);
     }
 
-    public void loadBantuan(){
-        listBantuan.clear();
-        rv_bantuan.setAdapter(null);
+    public void loadHistory(String id){
+        listHistory.clear();
+        rv_history.setAdapter(null);
         requestQueue = Volley.newRequestQueue(getActivity());
-        String url = "https://arjekindonesia.com/webservice_nplc/fetch_bantuan.php";
-        final JsonObjectRequest jor = new JsonObjectRequest(Request.Method.POST, url, null,
+        String url = "https://arjekindonesia.com/webservice_nplc/fetch_history.php";
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id);
+        JSONObject parameters = new JSONObject(params);
+        final JsonObjectRequest jor = new JsonObjectRequest(Request.Method.POST, url, parameters,
                 new Response.Listener<JSONObject>(){
                     @Override
                     public void onResponse(JSONObject response) {
@@ -93,24 +88,29 @@ public class FragmentBantuan extends Fragment {
                         try {
                             JSONArray hasil = null;
                             try {
-                                hasil = response.getJSONArray("bantuan");
+                                hasil = response.getJSONArray("history");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
                             if(hasil.length() == 0){
-
+                                txtTidakAda.setVisibility(View.VISIBLE);
                             }else{
                                 for (int i = 0; i < hasil.length(); i++) {
                                     JSONObject jsonObject = hasil.getJSONObject(i);
-                                    id = jsonObject.getString("id");
-                                    judul = jsonObject.getString("judul");
-                                    des = jsonObject.getString("des");
-                                    updated = jsonObject.getString("updated_at");
+                                    hsl = jsonObject.getString("msg");
+                                    if(hsl.equalsIgnoreCase("null")){
 
-                                    Bantuan b = new Bantuan(id,judul,des,updated);
-                                    listBantuan.add(b);
-
+                                    }else{
+                                        idHis = jsonObject.getString("id");
+                                        idPos = jsonObject.getString("id_pos");
+                                        hMy = jsonObject.getString("htim1");
+                                        idVs = jsonObject.getString("tim2");
+                                        hVs = jsonObject.getString("htim2");
+                                        created = jsonObject.getString("created_at");
+                                        History h = new History(idHis,idPos,hMy,idVs,hVs,created);
+                                        listHistory.add(h);
+                                    }
 
 
 
@@ -118,7 +118,7 @@ public class FragmentBantuan extends Fragment {
                             }
 
                             if (getActivity()!=null) {
-                                showBantuan(listBantuan);
+                                showHistory(listHistory);
                             }
 
                         } catch (JSONException e) {
@@ -137,27 +137,26 @@ public class FragmentBantuan extends Fragment {
     }
 
 
-    public void showBantuan(ArrayList<Bantuan> list){
-        rv_bantuan.setLayoutManager(new LinearLayoutManager(getActivity()));
-        CardBantuan bantuanAdapter = new CardBantuan(getActivity());
-        bantuanAdapter.setListBantuan(list);
-        rv_bantuan.setAdapter(bantuanAdapter);
+    public void showHistory(ArrayList<History> list){
+        rv_history.setLayoutManager(new LinearLayoutManager(getActivity()));
+        CardHistory historyAdapter = new CardHistory(getActivity());
+        historyAdapter.setListHistory(list);
+        rv_history.setAdapter(historyAdapter);
 
-        ItemClickSupport.addTo(rv_bantuan).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+        /*ItemClickSupport.addTo(rvNowPlaying).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                v.startAnimation(klik);
-                lb.clear();
-                Intent i = new Intent(getActivity(), BantuanDetail.class);
-                Bantuan b = listBantuan.get(position);
-                lb.add(b);
-                i.putExtra("lb", lb);
+                lm.clear();
+                Intent i = new Intent(getActivity(), MovieDetail.class);
+                Movies mov = listMov.get(position);
+                lm.add(mov);
+                i.putExtra("lm", lm);
+                //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //getActivity().finish();
                 startActivity(i);
-                getActivity().overridePendingTransition(R.anim.enter, R.anim.exit);
             }
-        });
+        });*/
 
     }
-
 
 }

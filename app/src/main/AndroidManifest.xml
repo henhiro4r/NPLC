@@ -28,8 +28,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BantuanDetail"></activity>
-        <activity android:name=".card.CardBantuan" />
+        <activity android:name=".card.CardPost" />
         <activity android:name=".card.CardHistory" />
         <activity android:name=".PlayScanner" />
         <activity

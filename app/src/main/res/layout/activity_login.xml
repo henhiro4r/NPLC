@@ -32,68 +32,59 @@
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/edit_kode_login"
+        app:layout_constraintBottom_toTopOf="@+id/edit_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/edit_kode_login"
-        android:layout_width="wrap_content"
+        android:id="@+id/edit_username"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="48dp"
         android:autofillHints="@string/kode"
         android:background="@android:drawable/editbox_background_normal"
         android:ems="10"
-        android:hint="@string/kodetim"
+        android:hint="@string/txt_username"
         android:inputType="textPersonName"
-        android:paddingLeft="48dp"
-        android:paddingTop="16dp"
-        android:paddingRight="48dp"
-        android:paddingBottom="16dp"
-        android:textAlignment="center"
+        android:padding="16dp"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/img_kode_login"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/edit_password"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:contentDescription="@string/img"
-        app:layout_constraintBottom_toBottomOf="@+id/edit_kode_login"
-        app:layout_constraintStart_toStartOf="@+id/edit_kode_login"
-        app:layout_constraintTop_toTopOf="@+id/edit_kode_login"
-        app:srcCompat="@drawable/ic_code_prim_24dp" />
+        android:layout_marginTop="24dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10"
+        android:hint="@string/txt_password"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/edit_username"
+        app:layout_constraintStart_toStartOf="@+id/edit_username"
+        app:layout_constraintTop_toBottomOf="@+id/edit_username" />
 
     <Button
-        android:id="@+id/btn_mulai_login"
+        android:id="@+id/btn_login"
         style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/bg_btn_curve_red_border"
         android:paddingStart="48dp"
         android:paddingEnd="48dp"
         android:text="@string/mulai"
         android:textColor="@color/colorPeach"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/edit_kode_login"
-        app:layout_constraintStart_toStartOf="@+id/edit_kode_login"
-        app:layout_constraintTop_toBottomOf="@+id/edit_kode_login" />
-
-    <ImageView
-        android:id="@+id/img_kode2_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:contentDescription="@string/img"
-        app:layout_constraintBottom_toBottomOf="@+id/edit_kode_login"
-        app:layout_constraintEnd_toEndOf="@+id/edit_kode_login"
-        app:layout_constraintTop_toTopOf="@+id/edit_kode_login"
-        app:srcCompat="@drawable/ic_code_prim_24dp" />
+        app:layout_constraintEnd_toEndOf="@+id/edit_username"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="@+id/edit_username"
+        app:layout_constraintTop_toBottomOf="@+id/edit_password" />
 
     <ImageView
         android:id="@+id/imgs1_login"

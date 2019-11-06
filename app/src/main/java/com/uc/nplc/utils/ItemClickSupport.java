@@ -1,9 +1,11 @@
-package com.uc.nplc;
+package com.uc.nplc.utils;
 
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.uc.nplc.R;
 
 public class ItemClickSupport {
     private final RecyclerView mRecyclerView;

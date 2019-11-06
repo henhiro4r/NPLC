@@ -42,7 +42,7 @@ public class Spalsh extends AppCompatActivity {
             i = new Intent(getApplicationContext(), Login.class);
         }else{
             i = new Intent(getApplicationContext(),MainActivity.class);
-            Toast.makeText(this, "Selamat datang kembali Tim "+userPref.getString("nama","-")+"!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Selamat datang kembali Tim "+userPref.getString("name","-")+"!", Toast.LENGTH_SHORT).show();
         }
 
         Thread timer = new Thread(){

@@ -11,15 +11,15 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.uc.nplc.fragment.FragmentPost;
+import com.uc.nplc.fragment.FragmentDashboard;
+import com.uc.nplc.fragment.FragmentHistory;
+import com.uc.nplc.fragment.FragmentPortal;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import java.lang.reflect.Field;
 
@@ -109,9 +109,9 @@ public class MainActivity extends AppCompatActivity {
                     bar.setDisplayShowHomeEnabled(false);
                     bar.setLogo(R.mipmap.ic_launcher_round);
                     bar.setDisplayUseLogoEnabled(false);
-                    FragmentBantuan bantuan = new FragmentBantuan();
+                    FragmentPost bantuan = new FragmentPost();
                     FragmentTransaction ftBantuan = getSupportFragmentManager().beginTransaction();
-                    ftBantuan.replace(R.id.frame_main, bantuan, "Bantuan");
+                    ftBantuan.replace(R.id.frame_main, bantuan, "Post");
                     ftBantuan.commit();
 
                     return true;

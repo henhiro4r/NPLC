@@ -13,7 +13,7 @@
     <string name="rewardportal">Reward portal:</string>
     <string name="masukkankode">Masukkan kode tim untuk mulai bermain dan berkompetisi</string>
     <string name="kode">Masukkan kode tim</string>
-    <string name="mulai">Mulai</string>
+    <string name="mulai">Log in</string>
     <string name="kodetim">KODE TIM</string>
     <string name="nolpertiga">0 / 3</string>
     <string name="portal1">Portal Time Traveller - 1</string>
@@ -38,6 +38,8 @@
     <string name="txtnull">-</string>
     <string name="pos1">POS 01</string>
     <string name="nkali">0/3</string>
+    <string name="txt_username">Username</string>
+    <string name="txt_password">Password</string>
 
 
 </resources>
