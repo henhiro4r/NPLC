@@ -41,7 +41,7 @@ public class FragmentPost extends Fragment {
         // Required empty public constructor
     }
 
-    private String title = "", location = "", type = "";
+    private String id = "", title = "", location = "", type = "";
 
     private ArrayList<Post> listPost = new ArrayList<>();
     private RecyclerView rv_post;
@@ -86,10 +86,11 @@ public class FragmentPost extends Fragment {
                             }else{
                                 for (int i = 0; i < result.length(); i++) {
                                     JSONObject jsonObject = result.getJSONObject(i);
+                                    id = jsonObject.getString("id");
                                     title = jsonObject.getString("title");
                                     type = jsonObject.getString("type");
                                     location = jsonObject.getString("location");
-                                    Post b = new Post(title,location,type);
+                                    Post b = new Post(id,title,location,type);
                                     listPost.add(b);
                                 }
                             }

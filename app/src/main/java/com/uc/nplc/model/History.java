@@ -6,43 +6,47 @@ public class History implements Serializable {
 
     public History(){}
 
-    private String id;
-    private String idPos;
-    private String hMy;
-    private String idVs;
-    private String hVs;
-    private String created;
+    private String game_id;
+    private String status;
+    private String point;
+    private String time_start;
 
-    public History(String id, String idPos, String hMy, String idVs, String hVs, String created) {
-        this.id = id;
-        this.idPos = idPos;
-        this.hMy = hMy;
-        this.idVs = idVs;
-        this.hVs = hVs;
-        this.created = created;
+    public History(String game_id, String status, String point, String time_start) {
+        this.game_id = game_id;
+        this.status = status;
+        this.point = point;
+        this.time_start = time_start;
     }
 
-    public String getId() {
-        return id;
+    public String getGame_id() {
+        return game_id;
     }
 
-    public String getIdPos() {
-        return idPos;
+    public void setGame_id(String game_id) {
+        this.game_id = game_id;
     }
 
-    public String gethMy() {
-        return hMy;
+    public String getStatus() {
+        return status;
     }
 
-    public String getIdVs() {
-        return idVs;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String gethVs() {
-        return hVs;
+    public String getPoint() {
+        return point;
     }
 
-    public String getCreated() {
-        return created;
+    public void setPoint(String point) {
+        this.point = point;
+    }
+
+    public String getTime_start() {
+        return time_start;
+    }
+
+    public void setTime_start(String time_start) {
+        this.time_start = time_start;
     }
 }

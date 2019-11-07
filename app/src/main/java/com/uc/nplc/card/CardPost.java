@@ -39,6 +39,12 @@ public class CardPost extends RecyclerView.Adapter<CardPost.CardViewViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull CardPost.CardViewViewHolder holder, int position) {
         Post b = getListPost().get(position);
+        if(Integer.parseInt(b.getId()) < 10){
+            String post = "0"+b.getId();
+            holder.id.setText(post);
+        }else{
+            holder.id.setText(b.getId());
+        }
         holder.title.setText(b.getTitle());
         holder.location.setText(b.getLocation());
         holder.type.setText(b.getType());
@@ -50,10 +56,11 @@ public class CardPost extends RecyclerView.Adapter<CardPost.CardViewViewHolder>{
     }
 
     class CardViewViewHolder extends RecyclerView.ViewHolder{
-        TextView title, location, type;
+        TextView id, title, location, type;
 
         CardViewViewHolder(View itemView) {
             super(itemView);
+            id = itemView.findViewById(R.id.post_id);
             title = itemView.findViewById(R.id.txt_title_post);
             location = itemView.findViewById(R.id.txt_location);
             type = itemView.findViewById(R.id.type);

@@ -1,18 +1,16 @@
 package com.uc.nplc.card;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.uc.nplc.R;
 import com.uc.nplc.model.History;
@@ -45,30 +43,36 @@ public class CardHistory extends RecyclerView.Adapter<CardHistory.CardViewViewHo
     @Override
     public void onBindViewHolder(@NonNull CardHistory.CardViewViewHolder holder, int position) {
         History h = getListHistory().get(position);
-        if(Integer.parseInt(h.getIdPos()) < 10){
-            holder.txt_pos.setText("POS 0"+h.getIdPos());
+        String post, point;
+        if(Integer.parseInt(h.getGame_id()) < 10){
+            post = "POST 0"+h.getGame_id();
+            holder.txt_pos.setText(post);
         }else{
-            holder.txt_pos.setText("POS "+h.getIdPos());
+            post = "POST "+h.getGame_id();
+            holder.txt_pos.setText(post);
         }
 
-        if(h.gethMy().equalsIgnoreCase("w")){
-            holder.txt_wdl.setText("WIN");
+        if(h.getStatus().equalsIgnoreCase("w")){
+            holder.txt_wdl.setText(R.string.win);
             holder.txt_wdl.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
             holder.cv.setCardBackgroundColor(ContextCompat.getColor(context, R.color.colorGreen));
-            holder.txt_pts.setText("+100pts");
-        }else if(h.gethMy().equalsIgnoreCase("d")){
-            holder.txt_wdl.setText("DRAW");
+            point = "+"+ h.getPoint() +"pts";
+            holder.txt_pts.setText(point);
+        }else if(h.getStatus().equalsIgnoreCase("d")){
+            holder.txt_wdl.setText(R.string.draw);
             holder.txt_wdl.setTextColor(ContextCompat.getColor(context, R.color.colorTosca));
             holder.cv.setCardBackgroundColor(ContextCompat.getColor(context, R.color.colorTosca));
-            holder.txt_pts.setText("+50pts");
-        }else if(h.gethMy().equalsIgnoreCase("l")){
-            holder.txt_wdl.setText("LOSE");
+            point = "+"+ h.getPoint() +"pts";
+            holder.txt_pts.setText(point);
+        }else if(h.getStatus().equalsIgnoreCase("l")){
+            holder.txt_wdl.setText(R.string.lose);
             holder.txt_wdl.setTextColor(ContextCompat.getColor(context, R.color.colorMerah));
             holder.cv.setCardBackgroundColor(ContextCompat.getColor(context, R.color.colorMerah));
-            holder.txt_pts.setText("+25pts");
+            point = "+"+ h.getPoint() +"pts";
+            holder.txt_pts.setText(point);
         }
 
-        holder.txt_time.setText(h.getCreated());
+        holder.txt_time.setText(h.getTime_start());
 
     }
 

@@ -6,14 +6,24 @@ public class Post implements Serializable {
 
     public Post(){}
 
+    private String id;
     private String title;
     private String location;
     private String type;
 
-    public Post(String title, String location, String type) {
+    public Post(String id, String title, String location, String type) {
+        this.id = id;
         this.title = title;
         this.location = location;
         this.type = type;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {

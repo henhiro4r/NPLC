@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -44,12 +44,11 @@ public class FragmentHistory extends Fragment {
 
     }
 
-    private String hsl = "", idHis = "", idPos = "", hMy = "", idVs = "", hVs = "", created = "", userid = "";
+    private String status = "", game_id = "", point = "", time_start = "", userid = "", message = "";
 
     private ArrayList<History> listHistory = new ArrayList<>();
     private RecyclerView rv_history;
     private ProgressBar pbHistory;
-    private TextView txtTidakAda;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,31 +81,24 @@ public class FragmentHistory extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONArray hasil = null;
+                            JSONArray result;
                             try {
-                                hasil = response.getJSONArray("history");
+                                message = response.getString("message");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
-                            if(Objects.requireNonNull(hasil).length() == 0){
-                                txtTidakAda.setVisibility(View.VISIBLE);
+                            if(message.equals("null")){
+                                showMessage();
                             }else{
-                                for (int i = 0; i < hasil.length(); i++) {
-                                    JSONObject jsonObject = hasil.getJSONObject(i);
-                                    hsl = jsonObject.getString("msg");
-                                    if(hsl.equalsIgnoreCase("null")){
-                                        //
-                                    }else{
-                                        idHis = jsonObject.getString("id");
-                                        idPos = jsonObject.getString("game_id");
-                                        hMy = jsonObject.getString("status");
-                                        idVs = jsonObject.getString("point");
-                                        hVs = jsonObject.getString("htim2");
-                                        created = jsonObject.getString("time_start");
-                                        History h = new History(idHis,idPos,hMy,idVs,hVs,created);
-                                        listHistory.add(h);
-                                    }
+                                result = response.getJSONArray("history");
+                                for (int i = 0; i < result.length(); i++) {
+                                    JSONObject jsonObject = result.getJSONObject(i);
+                                    game_id = jsonObject.getString("game_id");
+                                    status = jsonObject.getString("status");
+                                    point = jsonObject.getString("point");
+                                    time_start = jsonObject.getString("time_start");
+                                    History h = new History(game_id, status, point, time_start);
+                                    listHistory.add(h);
                                 }
                             }
                             if (getActivity()!=null) {
@@ -141,5 +133,9 @@ public class FragmentHistory extends Fragment {
         } else {
             pbHistory.setVisibility(View.GONE);
         }
+    }
+
+    private void showMessage() {
+        Toast.makeText(getActivity(), "No record found!", Toast.LENGTH_SHORT).show();
     }
 }
