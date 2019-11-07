@@ -1,6 +1,5 @@
 package com.uc.nplc.fragment;
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -33,7 +32,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,27 +41,25 @@ public class FragmentHistory extends Fragment {
 
 
     public FragmentHistory() {
-        // Required empty public constructor
+
     }
 
-    RequestQueue requestQueue;
-    String hsl = "", idHis = "", idPos = "", hMy = "", idVs = "", hVs = "", created = "", userid = "";
+    private String hsl = "", idHis = "", idPos = "", hMy = "", idVs = "", hVs = "", created = "", userid = "";
 
-    ArrayList<History> listHistory = new ArrayList<>();
-    RecyclerView rv_history;
-    SharedPreferences userPref;
-    ProgressBar progBar;
-    TextView txtTidakAda;
+    private ArrayList<History> listHistory = new ArrayList<>();
+    private RecyclerView rv_history;
+    private ProgressBar pbHistory;
+    private TextView txtTidakAda;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         final View v =  inflater.inflate(R.layout.fragment_history, container, false);
-        userPref = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        SharedPreferences userPref = Objects.requireNonNull(getActivity()).getSharedPreferences("user", Context.MODE_PRIVATE);
         userid = userPref.getString("id","-");
         rv_history = v.findViewById(R.id.rv_fr_history);
-
+        pbHistory = v.findViewById(R.id.pb_history);
+        showLoading(true);
         return v;
     }
 
@@ -72,11 +69,11 @@ public class FragmentHistory extends Fragment {
         loadHistory(userid);
     }
 
-    public void loadHistory(String id){
+    private void loadHistory(String id){
         listHistory.clear();
         rv_history.setAdapter(null);
-        requestQueue = Volley.newRequestQueue(getActivity());
-        String url = "https://arjekindonesia.com/webservice_nplc/fetch_history.php";
+        RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getActivity()));
+        String url = "https://7thnplc.wowrackcustomers.com/webservice/fetch_history.php";
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
         JSONObject parameters = new JSONObject(params);
@@ -84,7 +81,6 @@ public class FragmentHistory extends Fragment {
                 new Response.Listener<JSONObject>(){
                     @Override
                     public void onResponse(JSONObject response) {
-                        //progBar.setVisibility(View.INVISIBLE);
                         try {
                             JSONArray hasil = null;
                             try {
@@ -93,34 +89,30 @@ public class FragmentHistory extends Fragment {
                                 e.printStackTrace();
                             }
 
-                            if(hasil.length() == 0){
+                            if(Objects.requireNonNull(hasil).length() == 0){
                                 txtTidakAda.setVisibility(View.VISIBLE);
                             }else{
                                 for (int i = 0; i < hasil.length(); i++) {
                                     JSONObject jsonObject = hasil.getJSONObject(i);
                                     hsl = jsonObject.getString("msg");
                                     if(hsl.equalsIgnoreCase("null")){
-
+                                        //
                                     }else{
                                         idHis = jsonObject.getString("id");
-                                        idPos = jsonObject.getString("id_pos");
-                                        hMy = jsonObject.getString("htim1");
-                                        idVs = jsonObject.getString("tim2");
+                                        idPos = jsonObject.getString("game_id");
+                                        hMy = jsonObject.getString("status");
+                                        idVs = jsonObject.getString("point");
                                         hVs = jsonObject.getString("htim2");
-                                        created = jsonObject.getString("created_at");
+                                        created = jsonObject.getString("time_start");
                                         History h = new History(idHis,idPos,hMy,idVs,hVs,created);
                                         listHistory.add(h);
                                     }
-
-
-
                                 }
                             }
-
                             if (getActivity()!=null) {
+                                showLoading(false);
                                 showHistory(listHistory);
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -136,27 +128,18 @@ public class FragmentHistory extends Fragment {
         requestQueue.add(jor);
     }
 
-
-    public void showHistory(ArrayList<History> list){
+    private void showHistory(ArrayList<History> list){
         rv_history.setLayoutManager(new LinearLayoutManager(getActivity()));
         CardHistory historyAdapter = new CardHistory(getActivity());
         historyAdapter.setListHistory(list);
         rv_history.setAdapter(historyAdapter);
-
-        /*ItemClickSupport.addTo(rvNowPlaying).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                lm.clear();
-                Intent i = new Intent(getActivity(), MovieDetail.class);
-                Movies mov = listMov.get(position);
-                lm.add(mov);
-                i.putExtra("lm", lm);
-                //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //getActivity().finish();
-                startActivity(i);
-            }
-        });*/
-
     }
 
+    private void showLoading(Boolean state) {
+        if (state) {
+            pbHistory.setVisibility(View.VISIBLE);
+        } else {
+            pbHistory.setVisibility(View.GONE);
+        }
+    }
 }

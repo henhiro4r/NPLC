@@ -4,17 +4,14 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="portal">Portal</string>
-    <string name="riwayat">Riwayat</string>
-    <string name="bantuan">Bantuan</string>
+    <string name="riwayat">History</string>
+    <string name="bantuan">Post List</string>
     <string name="img">img</string>
-    <string name="play">MAIN</string>
-    <string name="pointmu">Pointmu: 0 pts</string>
-    <string name="pointterpakai">Point terpakai: 0 pts</string>
-    <string name="rewardportal">Reward portal:</string>
-    <string name="masukkankode">Masukkan kode tim untuk mulai bermain dan berkompetisi</string>
-    <string name="kode">Masukkan kode tim</string>
+    <string name="play">PLAY</string>
+    <string name="pointmu">Current Point: </string>
+    <string name="pointterpakai">Point used: </string>
+    <string name="rewardportal">Badge:</string>
     <string name="mulai">Log in</string>
-    <string name="kodetim">KODE TIM</string>
     <string name="nolpertiga">0 / 3</string>
     <string name="portal1">Portal Time Traveller - 1</string>
     <string name="desp1">Kuiz/Game yang akan kalian hadapi di Portal 1 ini memerlukan kemampuan fokus yang sangat tinggi.</string>
@@ -33,13 +30,14 @@
     <string name="pos00">POS 00</string>
     <string name="tgl">0000-00-00 00:00:00</string>
     <string name="hitim">Hi, Tim Challengers</string>
-    <string name="judulbatunan">Judul Card Bantuan</string>
-    <string name="desbantuan">Di sini konten deskripsi bantuan</string>
+    <string name="postTitle">Post Title</string>
+    <string name="postLocation">Post Location</string>
     <string name="txtnull">-</string>
     <string name="pos1">POS 01</string>
     <string name="nkali">0/3</string>
     <string name="txt_username">Username</string>
     <string name="txt_password">Password</string>
-
-
+    <string name="load">Loading…</string>
+    <string name="type">S</string>
+    <string name="log_title">Please insert username and password to log in to your account</string>
 </resources>

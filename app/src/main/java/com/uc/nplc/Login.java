@@ -1,5 +1,6 @@
 package com.uc.nplc;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -10,6 +11,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -47,6 +49,7 @@ public class Login extends AppCompatActivity {
     EditText editUsername, editPassword;
     Button btnLogin;
     RequestQueue requestQueue;
+    private static final int MY_CAMERA_REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +89,26 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.CAMERA},
+                        MY_CAMERA_REQUEST_CODE);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_CAMERA_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                showMessage("Camera Access granted");
+            } else {
+                showMessage("Camera Access denied");
+            }
+        }
     }
 
     public void login(String username, String password){
@@ -101,7 +124,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONObject user = null;
+                            JSONObject user;
                             String message = null;
                             try {
                                 message = response.getString("message");
@@ -113,14 +136,13 @@ public class Login extends AppCompatActivity {
                                 user = response.getJSONObject("user");
                                 userEditor.putString("id", user.getString("id"));
                                 userEditor.putString("name", user.getString("name"));
-                                userEditor.putString("point", user.getString("point_now"));
                                 userEditor.commit();
                                 Intent in = new Intent(Login.this, MainActivity.class);
                                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(in);
                                 overridePendingTransition(R.anim.enter, R.anim.exit);
                                 finish();
-                                showMessage("Selamat bermain & selamat berkompetisi Tim "+ userPref.getString("name","-") +"!");
+                                showMessage("Good luck, Have fun! "+ userPref.getString("name","-") +"!");
                             } else {
                                 showMessage(message);
                             }
@@ -171,6 +193,4 @@ public class Login extends AppCompatActivity {
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(Login.this, "Press again to exit!", Toast.LENGTH_SHORT).show();
     }
-
-
 }

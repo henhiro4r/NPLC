@@ -31,7 +31,7 @@ public class CardPost extends RecyclerView.Adapter<CardPost.CardViewViewHolder>{
     @NonNull
     @Override
     public CardPost.CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_bantuan, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_post, parent, false);
         return new CardPost.CardViewViewHolder(view);
     }
 
@@ -39,8 +39,9 @@ public class CardPost extends RecyclerView.Adapter<CardPost.CardViewViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull CardPost.CardViewViewHolder holder, int position) {
         Post b = getListPost().get(position);
-        holder.txt_judul.setText(b.getJudul());
-        holder.txt_des.setText(b.getDes());
+        holder.title.setText(b.getTitle());
+        holder.location.setText(b.getLocation());
+        holder.type.setText(b.getType());
     }
 
     @Override
@@ -49,13 +50,13 @@ public class CardPost extends RecyclerView.Adapter<CardPost.CardViewViewHolder>{
     }
 
     class CardViewViewHolder extends RecyclerView.ViewHolder{
-        TextView txt_judul;
-        TextView txt_des;
+        TextView title, location, type;
 
         CardViewViewHolder(View itemView) {
             super(itemView);
-            txt_judul = itemView.findViewById(R.id.txt_judul_card_bantuan);
-            txt_des = itemView.findViewById(R.id.txt_des_card_bantuan);
+            title = itemView.findViewById(R.id.txt_title_post);
+            location = itemView.findViewById(R.id.txt_location);
+            type = itemView.findViewById(R.id.type);
 
         }
     }

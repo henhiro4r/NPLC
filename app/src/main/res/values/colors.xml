@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#2E2A39</color>
     <color name="colorPrimaryDark">#2E2A39</color>
-    <color name="colorAccent">#2E2A39</color>
+    <color name="colorAccent">#FD9301</color>
     <color name="colorPeach">#E3D096</color>
     <color name="colorTosca">#53929B</color>
     <color name="colorOrange">#FD9301</color>

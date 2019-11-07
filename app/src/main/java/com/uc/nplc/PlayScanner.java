@@ -15,13 +15,15 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.google.zxing.Result;
 
+import java.util.Objects;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class PlayScanner extends AppCompatActivity implements ZXingScannerView.ResultHandler {
 
     private ZXingScannerView mScannerView;
     RequestQueue requestQueue;
-    String userid = "", posQR = "", idpos = "", idtrans = "", namapos = "";
+    String user_id = "", posQR = "";
     ActionBar bar;
     SharedPreferences userPref;
     private ProgressDialog pd;
@@ -30,15 +32,13 @@ public class PlayScanner extends AppCompatActivity implements ZXingScannerView.R
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_scanner);
-
         pd = new ProgressDialog(PlayScanner.this);
         mScannerView = new ZXingScannerView(PlayScanner.this);
         setContentView(mScannerView);
         bar = getSupportActionBar();
-        bar.setTitle("Scan QR Code POS");
+        Objects.requireNonNull(bar).setTitle("Scan QR Code");
         userPref = getSharedPreferences("user", MODE_PRIVATE);
-        userid = userPref.getString("id","-");
-
+        user_id = userPref.getString("id","-");
     }
 
     @Override
@@ -46,15 +46,15 @@ public class PlayScanner extends AppCompatActivity implements ZXingScannerView.R
         posQR = result.getText();
         String qr = posQR.substring(4,6);
         new AlertDialog.Builder(PlayScanner.this)
-                .setTitle("Konfirmasi")
-                .setMessage("Bermain di POS "+qr+"?")
+                .setTitle("Confirmation")
+                .setMessage("Are sure want to play on this post "+qr+"?")
                 .setCancelable(false)
-                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yex", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         pd.setCancelable(false);
-                        pd.setTitle("Dalam proses");
-                        pd.setMessage("Sedang masuk dalam thread, mohon tunggu...");
+                        pd.setTitle("Processing");
+                        pd.setMessage("Joining the game, please wait...");
                         pd.show();
                         Runnable r = new Runnable() {
                             @Override
@@ -64,12 +64,10 @@ public class PlayScanner extends AppCompatActivity implements ZXingScannerView.R
                         };
                         Handler cancel = new Handler();
                         cancel.postDelayed(r, 2000);
-
                         dialogInterface.cancel();
-
                     }
                 })
-                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
@@ -103,7 +101,6 @@ public class PlayScanner extends AppCompatActivity implements ZXingScannerView.R
         super.onPause();
         mScannerView.stopCamera();
     }
-
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {

@@ -17,7 +17,7 @@
         android:title="@string/riwayat" />
     <item
         android:id="@+id/navigation_bantuan"
-        android:icon="@drawable/ic_help_black_24dp"
+        android:icon="@drawable/ic_list_black_24dp"
         android:title="@string/bantuan" />
 
 </menu>

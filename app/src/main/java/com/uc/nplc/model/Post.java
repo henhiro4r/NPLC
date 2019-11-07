@@ -6,31 +6,37 @@ public class Post implements Serializable {
 
     public Post(){}
 
-    private String id;
-    private String judul;
-    private String des;
-    private String updated;
+    private String title;
+    private String location;
+    private String type;
 
-    public Post(String id, String judul, String des, String updated) {
-        this.id = id;
-        this.judul = judul;
-        this.des = des;
-        this.updated = updated;
+    public Post(String title, String location, String type) {
+        this.title = title;
+        this.location = location;
+        this.type = type;
     }
 
-    public String getId() {
-        return id;
+    public String getTitle() {
+        return title;
     }
 
-    public String getJudul() {
-        return judul;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getDes() {
-        return des;
+    public String getLocation() {
+        return location;
     }
 
-    public String getUpdated() {
-        return updated;
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
