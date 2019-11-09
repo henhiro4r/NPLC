@@ -27,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.uc.nplc.Login;
 import com.uc.nplc.PlayScanner;
 import com.uc.nplc.R;
+import com.uc.nplc.preference.Pref;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +47,7 @@ public class FragmentDashboard extends Fragment {
     }
 
     private TextView pointNow, pointUsed;
-    private SharedPreferences.Editor userEditor;
+    private Pref pref;
     private RequestQueue requestQueue;
 
     private ProgressDialog pd;
@@ -59,8 +60,7 @@ public class FragmentDashboard extends Fragment {
                              Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        SharedPreferences userPref = Objects.requireNonNull(getActivity()).getSharedPreferences("user", getActivity().MODE_PRIVATE);
-        userEditor = userPref.edit();
+        pref = new Pref(getActivity());
 
         pd = new ProgressDialog(getActivity());
         ImageView logout = v.findViewById(R.id.img_logout_fr_dashboard);
@@ -69,9 +69,9 @@ public class FragmentDashboard extends Fragment {
         TextView txt_tim = v.findViewById(R.id.txt_nama_tim_fr_dashboard);
         pointNow = v.findViewById(R.id.txt_pointN);
         pointUsed = v.findViewById(R.id.txt_pointU);
-        idTim = userPref.getString("id","-");
+        idTim = pref.getIdKey();
 
-        String greeting = "Hi, "+ userPref.getString("name","-")+"!";
+        String greeting = "Hi, "+ pref.getNameKey() +"!";
         txt_tim.setText(greeting);
 
         refresh.setOnClickListener(new View.OnClickListener() {
@@ -168,11 +168,11 @@ public class FragmentDashboard extends Fragment {
                     }
                     if (Objects.requireNonNull(message).equals("update")){
                         updates = response.getJSONObject("update");
-                        String pnow = updates.getString("point")+ " pts";
+                        pref.setPointKey(updates.getString("point"));
+                        String pnow = pref.getPointKey() + " pts";
                         String puse = updates.getString("used")+ " pts";
                         pointNow.setText(pnow);
                         pointUsed.setText(puse);
-                        userEditor.commit();
                         pd.cancel();
                     } else {
                         pd.cancel();
@@ -211,9 +211,7 @@ public class FragmentDashboard extends Fragment {
                         }
                         if(Objects.requireNonNull(message).equalsIgnoreCase("out_ok")){
                             showMessage("Thank you for playing!");
-                            userEditor.putString("id","-");
-                            userEditor.putString("name","-");
-                            userEditor.commit();
+                            pref.deletePref();
                             Intent in = new Intent(getActivity(), Login.class);
                             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(in);

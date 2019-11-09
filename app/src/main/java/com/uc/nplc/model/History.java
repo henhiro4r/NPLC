@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 public class History implements Serializable {
 
-    public History(){}
-
     private String game_id;
     private String status;
     private String point;

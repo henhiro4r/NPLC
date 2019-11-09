@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.uc.nplc.R;
 import com.uc.nplc.card.CardHistory;
 import com.uc.nplc.model.History;
+import com.uc.nplc.preference.Pref;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,13 +50,13 @@ public class FragmentHistory extends Fragment {
     private ArrayList<History> listHistory = new ArrayList<>();
     private RecyclerView rv_history;
     private ProgressBar pbHistory;
+    private Pref pref;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v =  inflater.inflate(R.layout.fragment_history, container, false);
-        SharedPreferences userPref = Objects.requireNonNull(getActivity()).getSharedPreferences("user", Context.MODE_PRIVATE);
-        userid = userPref.getString("id","-");
+        pref = new Pref(getActivity());
+        userid = pref.getIdKey();
         rv_history = v.findViewById(R.id.rv_fr_history);
         pbHistory = v.findViewById(R.id.pb_history);
         showLoading(true);

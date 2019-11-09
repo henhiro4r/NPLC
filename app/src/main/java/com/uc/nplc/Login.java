@@ -28,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.uc.nplc.preference.Pref;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,8 +41,7 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
 
-    SharedPreferences userPref;
-    SharedPreferences.Editor userEditor;
+    private Pref pref;
     private ProgressDialog pd;
     private AlphaAnimation klik = new AlphaAnimation(1F, 0.6F);
     private ActionBar bar;
@@ -62,8 +62,7 @@ public class Login extends AppCompatActivity {
         editPassword = findViewById(R.id.edit_password);
         btnLogin = findViewById(R.id.btn_login);
 
-        userPref = getSharedPreferences("user", MODE_PRIVATE);
-        userEditor = userPref.edit();
+        pref = new Pref(this);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,15 +133,15 @@ public class Login extends AppCompatActivity {
 
                             if (message.equals("welcome")){
                                 user = response.getJSONObject("user");
-                                userEditor.putString("id", user.getString("id"));
-                                userEditor.putString("name", user.getString("name"));
-                                userEditor.commit();
+                                pref.setIdKey(user.getString("id"));
+                                pref.setNameKey(user.getString("name"));
+                                pref.setPointKey(user.getString("point_now"));
                                 Intent in = new Intent(Login.this, MainActivity.class);
                                 in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(in);
                                 overridePendingTransition(R.anim.enter, R.anim.exit);
                                 finish();
-                                showMessage("Good luck, Have fun! "+ userPref.getString("name","-") +"!");
+                                showMessage("Good luck, Have fun! "+ pref.getNameKey() +"!");
                             } else {
                                 showMessage(message);
                             }

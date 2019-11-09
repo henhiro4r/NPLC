@@ -15,9 +15,6 @@
     <string name="nolpertiga">0 / 3</string>
     <string name="portal1">Portal Time Traveller - 1</string>
     <string name="desp1">Kuiz/Game yang akan kalian hadapi di Portal 1 ini memerlukan kemampuan fokus yang sangat tinggi.</string>
-    <string name="desp2">Kuiz/Game yang akan kalian hadapi di Portal 2 ini memerlukan kemampuan fisik yang sangat tinggi.</string>
-    <string name="desp3">Kuiz/Game yang akan kalian hadapi di Portal 3 ini memerlukan kemampuan bertahan yang sangat tinggi.</string>
-    <string name="desp4">Kuiz/Game yang akan kalian hadapi di Portal 4 ini memerlukan kemampuan logika yang sangat tinggi.</string>
     <string name="misibelumtuntas">Misi belum tuntas</string>
     <string name="txt500">500</string>
     <string name="portal2">Portal Time Traveller - 2</string>
@@ -41,4 +38,9 @@
     <string name="type">S</string>
     <string name="log_title">Please insert username and password to log in to your account</string>
     <string name="post_id">39</string>
+    <string name="status_0">You have\'t buy this quiz</string>
+    <string name="status_1">You not yet answered this quiz</string>
+    <string name="status_2">You already used all chance to answer this quiz</string>
+    <string name="status_3">You passed this quiz</string>
+    <string name="ne_point">Not Enough Point</string>
 </resources>

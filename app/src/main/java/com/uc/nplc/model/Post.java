@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 public class Post implements Serializable {
 
-    public Post(){}
-
     private String id;
     private String title;
     private String location;

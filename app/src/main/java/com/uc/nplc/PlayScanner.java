@@ -49,7 +49,7 @@ public class PlayScanner extends AppCompatActivity implements ZXingScannerView.R
                 .setTitle("Confirmation")
                 .setMessage("Are sure want to play on this post "+qr+"?")
                 .setCancelable(false)
-                .setPositiveButton("Yex", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         pd.setCancelable(false);

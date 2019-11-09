@@ -11,10 +11,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class Spalsh extends AppCompatActivity {
+import com.uc.nplc.preference.Pref;
 
-    SharedPreferences userPref;
-    SharedPreferences.Editor userEditor;
+public class Spalsh extends AppCompatActivity {
 
     ActionBar bar;
     ImageView img_logo, img_bg;
@@ -30,19 +29,17 @@ public class Spalsh extends AppCompatActivity {
 
         img_logo = findViewById(R.id.img_logo_spalsh);
         img_bg = findViewById(R.id.img_bg_spalsh);
-        //i = new Intent(getApplicationContext(), Login.class);
         Animation anim = AnimationUtils.loadAnimation(Spalsh.this,R.anim.transition);
         img_logo.startAnimation(anim);
         img_bg.startAnimation(anim);
 
-        userPref = getSharedPreferences("user", MODE_PRIVATE);
-        userEditor = userPref.edit();
+        Pref pref = new Pref(this);
 
-        if(userPref.getString("id", "-").equalsIgnoreCase("-")){
+        if(pref.getIdKey().equalsIgnoreCase("")){
             i = new Intent(getApplicationContext(), Login.class);
         }else{
             i = new Intent(getApplicationContext(),MainActivity.class);
-            Toast.makeText(this, "Welcome Back! "+userPref.getString("name","-")+"!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Welcome Back! "+ pref.getNameKey() +"!", Toast.LENGTH_SHORT).show();
         }
 
         Thread timer = new Thread(){
@@ -60,6 +57,5 @@ public class Spalsh extends AppCompatActivity {
             }
         };
         timer.start();
-
     }
 }
