@@ -82,7 +82,7 @@ public class FragmentPortal extends Fragment {
 
     private void loadData(){
         vIewModel.setQuizList(pref.getIdKey());
-        vIewModel.getQuiz().observe(getActivity(), loadQuiz);
+        vIewModel.getQuiz().observe(Objects.requireNonNull(getActivity()), loadQuiz);
     }
 
     @Override
