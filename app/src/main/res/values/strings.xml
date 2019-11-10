@@ -43,4 +43,14 @@
     <string name="status_2">You already used all chance to answer this quiz</string>
     <string name="status_3">You passed this quiz</string>
     <string name="ne_point">Not Enough Point</string>
+    <string name="ald_quiz">You already buy this quiz</string>
+    <string name="wrong_quiz">Used all 3 chance to answer</string>
+    <string name="question">Question</string>
+    <string name="answer">Answer</string>
+    <string name="answer_hint">Insert your answer here…</string>
+    <string name="submit">Submit</string>
+    <string name="dummy_text" translatable="false">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

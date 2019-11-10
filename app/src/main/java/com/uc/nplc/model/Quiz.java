@@ -10,6 +10,7 @@ public class Quiz implements Parcelable {
     private String question;
     private String price;
     private String status;
+    private String chance;
 
     public Quiz() {
     }
@@ -54,6 +55,13 @@ public class Quiz implements Parcelable {
         this.status = status;
     }
 
+    public String getChance() {
+        return chance;
+    }
+
+    public void setChance(String chance) {
+        this.chance = chance;
+    }
 
     @Override
     public int describeContents() {
@@ -67,6 +75,7 @@ public class Quiz implements Parcelable {
         dest.writeString(this.question);
         dest.writeString(this.price);
         dest.writeString(this.status);
+        dest.writeString(this.chance);
     }
 
     protected Quiz(Parcel in) {
@@ -75,6 +84,7 @@ public class Quiz implements Parcelable {
         this.question = in.readString();
         this.price = in.readString();
         this.status = in.readString();
+        this.chance = in.readString();
     }
 
     public static final Parcelable.Creator<Quiz> CREATOR = new Parcelable.Creator<Quiz>() {
