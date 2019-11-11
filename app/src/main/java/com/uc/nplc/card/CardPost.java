@@ -16,34 +16,34 @@ import java.util.ArrayList;
 public class CardPost extends RecyclerView.Adapter<CardPost.CardViewViewHolder>{
 
     private Context context;
-    private ArrayList<Post> listPost;
+    private ArrayList<Post> listPost = new ArrayList<>();
 
-    private ArrayList<Post> getListPost() {
-        return listPost;
-    }
-    public void setListPost(ArrayList<Post> listPost) {
-        this.listPost = listPost;
-    }
     public CardPost(Context context) {
         this.context = context;
+    }
+
+    public void setListPost(ArrayList<Post> list) {
+        listPost.clear();
+        listPost.addAll(list);
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public CardPost.CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_post, parent, false);
-        return new CardPost.CardViewViewHolder(view);
+        View view = LayoutInflater.from(context).inflate(R.layout.card_post, parent, false);
+        return new CardViewViewHolder(view);
     }
 
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull CardPost.CardViewViewHolder holder, int position) {
-        Post b = getListPost().get(position);
-        if(Integer.parseInt(b.getId()) < 10){
-            String post = "0"+b.getId();
+        Post b = listPost.get(position);
+        if(Integer.parseInt(b.getPost_id()) < 10){
+            String post = "0"+b.getPost_id();
             holder.id.setText(post);
         }else{
-            holder.id.setText(b.getId());
+            holder.id.setText(b.getPost_id());
         }
         holder.title.setText(b.getTitle());
         holder.location.setText(b.getLocation());
@@ -52,7 +52,7 @@ public class CardPost extends RecyclerView.Adapter<CardPost.CardViewViewHolder>{
 
     @Override
     public int getItemCount() {
-        return getListPost().size();
+        return listPost.size();
     }
 
     class CardViewViewHolder extends RecyclerView.ViewHolder{

@@ -35,7 +35,9 @@ public class ResultActivity extends AppCompatActivity {
 
         if (getIntent().getParcelableExtra(EXTRA_QUIZ) != null) {
             Quiz quiz = getIntent().getParcelableExtra(EXTRA_QUIZ);
-            tvTitle.setText(quiz.getTitle());
+            if (quiz != null) {
+                tvTitle.setText(quiz.getTitle());
+            }
         }
 
         btnScan.setOnClickListener(scanListener);

@@ -56,14 +56,16 @@ public class QuizActivity extends AppCompatActivity{
 
         if (getIntent().getParcelableExtra(EXTRA_QUIZ) != null){
             quiz = getIntent().getParcelableExtra(EXTRA_QUIZ);
-            setAttribute(quiz);
+            if (quiz != null) {
+                setAttribute(quiz);
+            }
         }
 
         btnSubmit.setOnClickListener(ansListener);
     }
 
     private void setAttribute(Quiz quiz) {
-        toolbar.setTitle( "Answer - " +quiz.getTitle());
+        toolbar.setTitle("Answer Quiz - " +quiz.getTitle());
         tvTitle.setText(quiz.getTitle());
         tvQuestion.setText(quiz.getQuestion());
         String chance = quiz.getChance() + "/3";

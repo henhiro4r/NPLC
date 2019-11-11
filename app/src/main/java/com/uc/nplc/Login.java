@@ -1,15 +1,8 @@
 package com.uc.nplc;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,21 +27,18 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.uc.nplc.preference.Pref;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Login extends AppCompatActivity {
 
     private Pref pref;
     private ProgressDialog pd;
     private AlphaAnimation klik = new AlphaAnimation(1F, 0.6F);
-    private ActionBar bar;
     String username = "", password = "";
     EditText editUsername, editPassword;
     Button btnLogin;
@@ -55,8 +49,10 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        bar = getSupportActionBar();
-        bar.hide();
+        ActionBar bar = getSupportActionBar();
+        if (bar != null){
+            bar.hide();
+        }
         pd = new ProgressDialog(Login.this);
         editUsername = findViewById(R.id.edit_username);
         editPassword = findViewById(R.id.edit_password);
@@ -131,7 +127,7 @@ public class Login extends AppCompatActivity {
                                 e.printStackTrace();
                             }
 
-                            if (message.equals("welcome")){
+                            if (Objects.equals(message, "welcome")){
                                 user = response.getJSONObject("user");
                                 pref.setIdKey(user.getString("id"));
                                 pref.setNameKey(user.getString("name"));

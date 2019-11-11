@@ -1,15 +1,14 @@
 package com.uc.nplc;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.uc.nplc.preference.Pref;
 
@@ -25,7 +24,9 @@ public class Spalsh extends AppCompatActivity {
         setContentView(R.layout.activity_spalsh);
 
         bar = getSupportActionBar();
-        bar.hide();
+        if (bar != null) {
+            bar.hide();
+        }
 
         img_logo = findViewById(R.id.img_logo_spalsh);
         img_bg = findViewById(R.id.img_bg_spalsh);

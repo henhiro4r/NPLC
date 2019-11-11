@@ -1,27 +1,22 @@
 package com.uc.nplc.model;
 
-import java.io.Serializable;
+public class Post {
 
-public class Post implements Serializable {
-
-    private String id;
+    private String post_id;
     private String title;
     private String location;
     private String type;
 
-    public Post(String id, String title, String location, String type) {
-        this.id = id;
-        this.title = title;
-        this.location = location;
-        this.type = type;
+    public Post() {
+
     }
 
-    public String getId() {
-        return id;
+    public String getPost_id() {
+        return post_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setPost_id(String post_id) {
+        this.post_id = post_id;
     }
 
     public String getTitle() {

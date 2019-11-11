@@ -20,16 +20,16 @@ import java.util.ArrayList;
 public class CardHistory extends RecyclerView.Adapter<CardHistory.CardViewViewHolder>{
 
     private Context context;
-    private ArrayList<History> listHistory;
+    private ArrayList<History> listHistory = new ArrayList<>();
 
-    private ArrayList<History> getListHistory() {
-        return listHistory;
-    }
-    public void setListHistory(ArrayList<History> listHistory) {
-        this.listHistory = listHistory;
-    }
     public CardHistory(Context context) {
         this.context = context;
+    }
+
+    public void setListHistory(ArrayList<History> list) {
+        listHistory.clear();
+        listHistory.addAll(list);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -42,7 +42,7 @@ public class CardHistory extends RecyclerView.Adapter<CardHistory.CardViewViewHo
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull CardHistory.CardViewViewHolder holder, int position) {
-        History h = getListHistory().get(position);
+        History h = listHistory.get(position);
         String post, point;
         if(Integer.parseInt(h.getGame_id()) < 10){
             post = "POST 0"+h.getGame_id();
@@ -78,7 +78,7 @@ public class CardHistory extends RecyclerView.Adapter<CardHistory.CardViewViewHo
 
     @Override
     public int getItemCount() {
-        return getListHistory().size();
+        return listHistory.size();
     }
 
     class CardViewViewHolder extends RecyclerView.ViewHolder{

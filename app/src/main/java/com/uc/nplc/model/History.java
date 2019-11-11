@@ -1,19 +1,13 @@
 package com.uc.nplc.model;
 
-import java.io.Serializable;
-
-public class History implements Serializable {
+public class History {
 
     private String game_id;
     private String status;
     private String point;
     private String time_start;
 
-    public History(String game_id, String status, String point, String time_start) {
-        this.game_id = game_id;
-        this.status = status;
-        this.point = point;
-        this.time_start = time_start;
+    public History() {
     }
 
     public String getGame_id() {

@@ -29,10 +29,6 @@ public class CardQuiz extends RecyclerView.Adapter<CardQuiz.QuizViewHolder> {
         notifyDataSetChanged();
     }
 
-    public ArrayList<Quiz> getQuizData() {
-        return quizData;
-    }
-
     @NonNull
     @Override
     public QuizViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,14 +42,19 @@ public class CardQuiz extends RecyclerView.Adapter<CardQuiz.QuizViewHolder> {
         holder.quiz_price.setText(quiz.getPrice());
         holder.quiz_title.setText(quiz.getTitle());
         holder.quiz_question.setText(quiz.getQuestion());
-        if (quiz.getStatus().equals("1")) {
-            holder.quiz_status.setText(R.string.status_1);
-        } else if (quiz.getStatus().equals("2")) {
-            holder.quiz_status.setText(R.string.status_2);
-        } else if (quiz.getStatus().equals("3")){
-            holder.quiz_status.setText(R.string.status_3);
-        } else {
-            holder.quiz_status.setText(R.string.status_0);
+        switch (quiz.getStatus()) {
+            case "1":
+                holder.quiz_status.setText(R.string.status_1);
+                break;
+            case "2":
+                holder.quiz_status.setText(R.string.status_2);
+                break;
+            case "3":
+                holder.quiz_status.setText(R.string.status_3);
+                break;
+            default:
+                holder.quiz_status.setText(R.string.status_0);
+                break;
         }
     }
 

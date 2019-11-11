@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_riwayat:
                     bar.show();
-                    bar.setTitle("History play");
+                    bar.setTitle("History Play");
                     bar.setElevation(0);
                     bar.setDisplayShowHomeEnabled(false);
                     bar.setLogo(R.mipmap.ic_launcher_round);
