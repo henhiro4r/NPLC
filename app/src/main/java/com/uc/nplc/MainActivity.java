@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         bar = getSupportActionBar();
         assert bar != null;
         bar.setElevation(0);
-        bar.hide();
+        bar.setTitle("Dashboard");
 
         FragmentDashboard dashboard = new FragmentDashboard();
         FragmentTransaction ftDashboard = getSupportFragmentManager().beginTransaction();
@@ -53,14 +53,13 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_dashboard:
                     bar.setElevation(0);
-                    bar.hide();
+                    bar.setTitle("Dashboard");
                     FragmentDashboard dashboard = new FragmentDashboard();
                     FragmentTransaction ftDashboard = getSupportFragmentManager().beginTransaction();
                     ftDashboard.replace(R.id.frame_main, dashboard, "Dashboard");
                     ftDashboard.commit();
                     return true;
                 case R.id.navigation_portal:
-                    bar.show();
                     bar.setTitle("Portal Master Game");
                     bar.setElevation(0);
                     bar.setDisplayShowHomeEnabled(false);
@@ -72,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
                     ftPortal.commit();
                     return true;
                 case R.id.navigation_riwayat:
-                    bar.show();
                     bar.setTitle("History Play");
                     bar.setElevation(0);
                     bar.setDisplayShowHomeEnabled(false);
@@ -84,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
                     ftHistory.commit();
                     return true;
                 case R.id.navigation_bantuan:
-                    bar.show();
                     bar.setTitle(R.string.bantuan);
                     bar.setElevation(0);
                     bar.setDisplayShowHomeEnabled(false);

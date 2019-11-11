@@ -72,7 +72,7 @@ public class FragmentPortal extends Fragment {
         cardQuiz.notifyDataSetChanged();
 
         vIewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(QuizViewModel.class);
-        onStart();
+        loadData();
 
         rvQuiz.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvQuiz.setAdapter(cardQuiz);
@@ -85,8 +85,8 @@ public class FragmentPortal extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         loadData();
     }
 

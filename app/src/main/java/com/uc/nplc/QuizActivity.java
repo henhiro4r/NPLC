@@ -1,6 +1,8 @@
 package com.uc.nplc;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -64,10 +66,33 @@ public class QuizActivity extends AppCompatActivity{
         btnSubmit.setOnClickListener(ansListener);
     }
 
-    private void setAttribute(Quiz quiz) {
+    private void setAttribute(final Quiz quiz) {
         toolbar.setTitle("Answer Quiz - " +quiz.getTitle());
         tvTitle.setText(quiz.getTitle());
-        tvQuestion.setText(quiz.getQuestion());
+        if  (quiz.getId().equals("3")){
+            tvQuestion.setText(getString(R.string.dummy_text));
+            tvQuestion.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    new AlertDialog.Builder(QuizActivity.this)
+                            .setTitle("Real Question")
+                            .setMessage(quiz.getQuestion())
+                            .setCancelable(false)
+                            .setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                    onResume();
+                                }
+                            })
+                            .create()
+                            .show();
+                    return true;
+                }
+            });
+        } else {
+            tvQuestion.setText(quiz.getQuestion());
+        }
         String chance = quiz.getChance() + "/3";
         tvChance.setText(chance);
     }

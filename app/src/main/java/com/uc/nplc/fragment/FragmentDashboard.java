@@ -16,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,6 +29,7 @@ import com.uc.nplc.Login;
 import com.uc.nplc.PlayScanner;
 import com.uc.nplc.R;
 import com.uc.nplc.preference.Pref;
+import com.uc.nplc.viewmodel.DashboardViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,12 +54,12 @@ public class FragmentDashboard extends Fragment {
 
     private ProgressDialog pd;
     private AlphaAnimation click = new AlphaAnimation(1F, 0.6F);
+    private DashboardViewModel viewModel;
 
     private String idTim = "";
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         pref = new Pref(getActivity());
@@ -72,6 +75,7 @@ public class FragmentDashboard extends Fragment {
 
         String greeting = "Hi, "+ pref.getNameKey() +"!";
         txt_tim.setText(greeting);
+        viewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(DashboardViewModel.class);
 
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,14 +137,25 @@ public class FragmentDashboard extends Fragment {
             @Override
             public void onClick(View v) {
                 v.startAnimation(click);
-                Intent i = new Intent(getActivity(), PlayScanner.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
-                Objects.requireNonNull(getActivity()).finish();
+                viewModel.check(idTim);
+                viewModel.getIsDone().observe(Objects.requireNonNull(getActivity()), checkStat);
             }
         });
         return v;
     }
+
+    private Observer<Boolean> checkStat = new Observer<Boolean>() {
+        @Override
+        public void onChanged(Boolean aBoolean) {
+            if  (aBoolean) {
+                Intent i = new Intent(getActivity(), PlayScanner.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+            } else {
+                showMessage("Account Disabled!");
+            }
+        }
+    };
 
     @Override
     public void onStart() {
