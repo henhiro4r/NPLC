@@ -4,8 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -34,6 +35,8 @@ public class FragmentHistory extends Fragment {
 
     private ProgressBar pbHistory;
     private CardHistory historyAdapter;
+    private ImageView ivNoData;
+    private TextView tvNoData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +45,8 @@ public class FragmentHistory extends Fragment {
         String userId = pref.getIdKey();
         RecyclerView rv_history = v.findViewById(R.id.rv_fr_history);
         pbHistory = v.findViewById(R.id.pb_history);
+        ivNoData = v.findViewById(R.id.img_noData);
+        tvNoData = v.findViewById(R.id.txt_no_data);
         showLoading(true);
         historyAdapter = new CardHistory(getActivity());
         historyAdapter.notifyDataSetChanged();
@@ -61,8 +66,11 @@ public class FragmentHistory extends Fragment {
             if  (histories != null){
                 historyAdapter.setListHistory(histories);
                 showLoading(false);
-            } else {
-                showMessage();
+                if (histories.size() == 0){
+                    noData(false);
+                } else {
+                    noData(true);
+                }
             }
         }
     };
@@ -75,7 +83,13 @@ public class FragmentHistory extends Fragment {
         }
     }
 
-    private void showMessage() {
-        Toast.makeText(getActivity(), "No record found!", Toast.LENGTH_SHORT).show();
+    private void noData(Boolean isEmpty){
+        if (isEmpty){
+            tvNoData.setVisibility(View.GONE);
+            ivNoData.setVisibility(View.GONE);
+        } else {
+            tvNoData.setVisibility(View.VISIBLE);
+            ivNoData.setVisibility(View.VISIBLE);
+        }
     }
 }

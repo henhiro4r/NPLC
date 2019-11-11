@@ -110,47 +110,14 @@
                     android:background="@drawable/bg">
 
                     <ImageView
-                        android:id="@+id/badge1"
+                        android:id="@+id/badge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:contentDescription="@string/img"
-                        app:layout_constraintBottom_toBottomOf="@+id/txt_reward_portal_fr_dashboard"
-                        app:layout_constraintStart_toEndOf="@+id/txt_reward_portal_fr_dashboard"
-                        app:layout_constraintTop_toTopOf="@+id/txt_reward_portal_fr_dashboard"
-                        app:srcCompat="@drawable/ic_star_tosca_trans_24dp" />
-
-                    <ImageView
-                        android:id="@+id/badge2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:contentDescription="@string/img"
-                        app:layout_constraintBottom_toBottomOf="@+id/badge1"
-                        app:layout_constraintStart_toEndOf="@+id/badge1"
-                        app:layout_constraintTop_toTopOf="@+id/badge1"
-                        app:srcCompat="@drawable/ic_star_tosca_trans_24dp" />
-
-                    <ImageView
-                        android:id="@+id/badge3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:contentDescription="@string/img"
-                        app:layout_constraintBottom_toBottomOf="@+id/badge2"
-                        app:layout_constraintStart_toEndOf="@+id/badge2"
-                        app:layout_constraintTop_toTopOf="@+id/badge2"
-                        app:srcCompat="@drawable/ic_star_tosca_trans_24dp" />
-
-                    <ImageView
-                        android:id="@+id/badge4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:contentDescription="@string/img"
-                        app:layout_constraintBottom_toBottomOf="@+id/badge3"
-                        app:layout_constraintStart_toEndOf="@+id/badge3"
-                        app:layout_constraintTop_toTopOf="@+id/badge3"
+                        app:layout_constraintBottom_toBottomOf="@+id/badge_count"
+                        app:layout_constraintStart_toEndOf="@+id/badge_count"
+                        app:layout_constraintTop_toTopOf="@+id/badge_count"
                         app:srcCompat="@drawable/ic_star_tosca_trans_24dp" />
 
                     <TextView
@@ -218,6 +185,19 @@
                         app:layout_constraintStart_toEndOf="@+id/txt_point_used"
                         app:layout_constraintTop_toTopOf="@+id/txt_point_used"
                         app:layout_constraintVertical_bias="0.0" />
+
+                    <TextView
+                        android:id="@+id/badge_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/nBadge"
+                        android:textColor="@color/colorTosca"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_reward_portal_fr_dashboard"
+                        app:layout_constraintStart_toEndOf="@+id/txt_reward_portal_fr_dashboard"
+                        app:layout_constraintTop_toTopOf="@+id/txt_reward_portal_fr_dashboard" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>

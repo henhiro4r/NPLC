@@ -35,17 +35,22 @@ public class HistoryViewModel extends ViewModel {
                 try {
                     String result = new String(responseBody);
                     JSONObject responseObject = new JSONObject(result);
-                    JSONArray list = responseObject.getJSONArray("history");
-                    for (int i = 0; i < list.length(); i++){
-                        JSONObject his = list.getJSONObject(i);
-                        History h = new History();
-                        h.setGame_id(his.getString("game_id"));
-                        h.setStatus(his.getString("status"));
-                        h.setPoint(his.getString("point"));
-                        h.setTime_start(his.getString("time_start"));
-                        histories.add(h);
+                    String message = responseObject.getString("message");
+                    if  (message.equals("ok")){
+                        JSONArray list = responseObject.getJSONArray("history");
+                        for (int i = 0; i < list.length(); i++){
+                            JSONObject his = list.getJSONObject(i);
+                            History h = new History();
+                            h.setGame_id(his.getString("game_id"));
+                            h.setStatus(his.getString("status"));
+                            h.setPoint(his.getString("point"));
+                            h.setTime_start(his.getString("time_start"));
+                            histories.add(h);
+                        }
+                        history.postValue(histories);
+                    } else {
+                        history.postValue(histories);
                     }
-                    history.postValue(histories);
                 } catch (Exception e) {
                     Log.d("exceptionHistory", Objects.requireNonNull(e.getMessage()));
                 }

@@ -48,9 +48,10 @@ public class FragmentDashboard extends Fragment {
 
     }
 
-    private TextView pointNow, pointUsed;
+    private TextView pointNow, pointUsed, count_badge;
     private Pref pref;
     private RequestQueue requestQueue;
+    private ImageView badge;
 
     private ProgressDialog pd;
     private AlphaAnimation click = new AlphaAnimation(1F, 0.6F);
@@ -68,6 +69,8 @@ public class FragmentDashboard extends Fragment {
         ImageView logout = v.findViewById(R.id.img_logout_fr_dashboard);
         ImageView main = v.findViewById(R.id.img_scan_fr_dashboard);
         ImageView refresh = v.findViewById(R.id.img_refresh_fr_dashboard);
+        badge = v.findViewById(R.id.badge);
+        count_badge = v.findViewById(R.id.badge_count);
         TextView txt_tim = v.findViewById(R.id.txt_nama_tim_fr_dashboard);
         pointNow = v.findViewById(R.id.txt_pointN);
         pointUsed = v.findViewById(R.id.txt_pointU);
@@ -185,8 +188,13 @@ public class FragmentDashboard extends Fragment {
                         pref.setPointKey(updates.getString("point"));
                         String pnow = pref.getPointKey() + " pts";
                         String puse = updates.getString("used")+ " pts";
+                        String num = updates.getString("badge");
                         pointNow.setText(pnow);
                         pointUsed.setText(puse);
+                        if  (Integer.parseInt(num) > 0){
+                            count_badge.setText(num);
+                            badge.setImageResource(R.drawable.ic_star_tosca_full_24dp);
+                        }
                         pd.cancel();
                     } else {
                         pd.cancel();
