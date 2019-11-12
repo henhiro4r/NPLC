@@ -87,7 +87,7 @@ public class PlayScanner extends AppCompatActivity implements ZXingScannerView.R
     private void scan(String code) {
         viewModel.play(code, user_id);
         viewModel.getMessage().observe(this, checkPlay);
-        finish();
+        intentBack();
     }
 
     private Observer<String> checkPlay = new Observer<String>() {
@@ -129,6 +129,10 @@ public class PlayScanner extends AppCompatActivity implements ZXingScannerView.R
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        intentBack();
+    }
+
+    private void intentBack(){
         Intent intent =  new Intent(PlayScanner.this, MainActivity.class);
         intent.putExtra(MainActivity.FRAGMENT_TO_LOAD, "Home");
         startActivity(intent);

@@ -39,7 +39,6 @@ public class CardQuiz extends RecyclerView.Adapter<CardQuiz.QuizViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
         Quiz quiz = quizData.get(position);
-        holder.quiz_price.setText(quiz.getPrice());
         holder.quiz_title.setText(quiz.getTitle());
         holder.quiz_question.setText(quiz.getQuestion());
         switch (quiz.getStatus()) {
@@ -65,14 +64,13 @@ public class CardQuiz extends RecyclerView.Adapter<CardQuiz.QuizViewHolder> {
 
     class QuizViewHolder extends RecyclerView.ViewHolder {
 
-        TextView quiz_title, quiz_question, quiz_status, quiz_price;
+        TextView quiz_title, quiz_question, quiz_status;
 
         QuizViewHolder(@NonNull View itemView) {
             super(itemView);
             quiz_title = itemView.findViewById(R.id.txt_title_quiz);
             quiz_question = itemView.findViewById(R.id.txt_desc_quiz);
             quiz_status = itemView.findViewById(R.id.txt_quiz_status);
-            quiz_price = itemView.findViewById(R.id.txt_quiz_price);
         }
     }
 }
