@@ -170,6 +170,15 @@ public class QuizActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent =  new Intent(QuizActivity.this, MainActivity.class);
+        intent.putExtra(MainActivity.FRAGMENT_TO_LOAD, "Quiz");
+        startActivity(intent);
+        finish();
+    }
+
     private void showMessage(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }

@@ -19,10 +19,6 @@ import cz.msebera.android.httpclient.Header;
 public class DashboardViewModel extends ViewModel {
     private MutableLiveData<Boolean> isDone = new MutableLiveData<>();
 
-    public void init(){
-
-    }
-
     public void check(String user_id){
         AsyncHttpClient client = new AsyncHttpClient();
         String url = "https://7thnplc.wowrackcustomers.com/webservice/checker.php";
@@ -53,10 +49,6 @@ public class DashboardViewModel extends ViewModel {
                 isDone.setValue(false);
             }
         });
-    }
-
-    public void refresh(){
-
     }
 
     public LiveData<Boolean> getIsDone() {

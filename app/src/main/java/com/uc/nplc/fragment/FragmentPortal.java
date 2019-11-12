@@ -72,21 +72,17 @@ public class FragmentPortal extends Fragment {
         cardQuiz.notifyDataSetChanged();
 
         vIewModel = ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(QuizViewModel.class);
-        loadData();
-
-        rvQuiz.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvQuiz.setAdapter(cardQuiz);
-        clickSupport();
-    }
-
-    private void loadData(){
-        vIewModel.setQuizList(pref.getIdKey());
-        vIewModel.getQuiz().observe(Objects.requireNonNull(getActivity()), loadQuiz);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        loadData();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         loadData();
     }
 
@@ -101,7 +97,11 @@ public class FragmentPortal extends Fragment {
         }
     };
 
-    private void clickSupport() {
+    private void loadData() {
+        vIewModel.setQuizList(pref.getIdKey());
+        vIewModel.getQuiz().observe(Objects.requireNonNull(getActivity()), loadQuiz);
+        rvQuiz.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvQuiz.setAdapter(cardQuiz);
         ItemClickSupport.addTo(rvQuiz).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, final int position, View v) {
@@ -161,6 +161,7 @@ public class FragmentPortal extends Fragment {
         Intent intent = new Intent(getActivity(), QuizActivity.class);
         intent.putExtra(QuizActivity.EXTRA_QUIZ, q);
         startActivity(intent);
+        getActivity().finish();
     }
 
     private Observer<Boolean> checkDone = new Observer<Boolean>() {

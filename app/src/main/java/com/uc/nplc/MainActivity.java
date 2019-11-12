@@ -1,6 +1,5 @@
 package com.uc.nplc;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -9,40 +8,47 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.uc.nplc.fragment.FragmentDashboard;
 import com.uc.nplc.fragment.FragmentHistory;
 import com.uc.nplc.fragment.FragmentPortal;
 import com.uc.nplc.fragment.FragmentPost;
 
-import java.lang.reflect.Field;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    ActionBar bar;
+    private ActionBar bar;
+    public static final String FRAGMENT_TO_LOAD = "fragLoad";
+    private BottomNavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         bar = getSupportActionBar();
-        assert bar != null;
-        bar.setElevation(0);
-        bar.setTitle("Dashboard");
-
-        FragmentDashboard dashboard = new FragmentDashboard();
-        FragmentTransaction ftDashboard = getSupportFragmentManager().beginTransaction();
-        ftDashboard.replace(R.id.frame_main, dashboard, "Dashboard");
-        ftDashboard.commit();
-
-        BottomNavigationView navigation = findViewById(R.id.nav_view_main);
+        navigation = findViewById(R.id.nav_view_main);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        disableShiftMode(navigation);
+        if (savedInstanceState == null){
+            navigation.setSelectedItemId(R.id.navigation_dashboard);
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (Objects.equals(getIntent().getStringExtra(FRAGMENT_TO_LOAD), "Quiz")) {
+            navigation.setSelectedItemId(R.id.navigation_portal);
+        }
+    }
+
+    public void loadFragment(Fragment fragment){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_main, fragment);
+        transaction.commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -50,70 +56,32 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_dashboard:
-                    bar.setElevation(0);
                     bar.setTitle("Dashboard");
-                    FragmentDashboard dashboard = new FragmentDashboard();
-                    FragmentTransaction ftDashboard = getSupportFragmentManager().beginTransaction();
-                    ftDashboard.replace(R.id.frame_main, dashboard, "Dashboard");
-                    ftDashboard.commit();
+                    fragment = new FragmentDashboard();
+                    loadFragment(fragment);
                     return true;
                 case R.id.navigation_portal:
                     bar.setTitle("Portal Master Game");
-                    bar.setElevation(0);
-                    bar.setDisplayShowHomeEnabled(false);
-                    bar.setLogo(R.mipmap.ic_launcher_round);
-                    bar.setDisplayUseLogoEnabled(false);
-                    FragmentPortal portal = new FragmentPortal();
-                    FragmentTransaction ftPortal = getSupportFragmentManager().beginTransaction();
-                    ftPortal.replace(R.id.frame_main, portal, "Portal");
-                    ftPortal.commit();
+                    fragment = new FragmentPortal();
+                    loadFragment(fragment);
                     return true;
                 case R.id.navigation_riwayat:
                     bar.setTitle("History Play");
-                    bar.setElevation(0);
-                    bar.setDisplayShowHomeEnabled(false);
-                    bar.setLogo(R.mipmap.ic_launcher_round);
-                    bar.setDisplayUseLogoEnabled(false);
-                    FragmentHistory history = new FragmentHistory();
-                    FragmentTransaction ftHistory = getSupportFragmentManager().beginTransaction();
-                    ftHistory.replace(R.id.frame_main, history, "History");
-                    ftHistory.commit();
+                    fragment = new FragmentHistory();
+                    loadFragment(fragment);
                     return true;
                 case R.id.navigation_bantuan:
                     bar.setTitle(R.string.bantuan);
-                    bar.setElevation(0);
-                    bar.setDisplayShowHomeEnabled(false);
-                    bar.setLogo(R.mipmap.ic_launcher_round);
-                    bar.setDisplayUseLogoEnabled(false);
-                    FragmentPost bantuan = new FragmentPost();
-                    FragmentTransaction ftBantuan = getSupportFragmentManager().beginTransaction();
-                    ftBantuan.replace(R.id.frame_main, bantuan, "Post");
-                    ftBantuan.commit();
+                    fragment = new FragmentPost();
+                    loadFragment(fragment);
                     return true;
             }
             return false;
         }
     };
-
-    @SuppressLint("RestrictedAPI")
-    public  void disableShiftMode(BottomNavigationView view) {
-        BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
-        try {
-            Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
-            shiftingMode.setAccessible(true);
-            shiftingMode.setBoolean(menuView, false);
-            shiftingMode.setAccessible(false);
-            for (int i = 0; i < menuView.getChildCount(); i++) {
-                BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
-                item.setShifting(false);
-                item.setChecked(item.getItemData().isChecked());
-            }
-        } catch (NoSuchFieldException | IllegalAccessException ignored) {
-
-        }
-    }
 
     public boolean doubleBackToExitPressedOnce = false;
     @Override

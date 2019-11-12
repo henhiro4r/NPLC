@@ -62,4 +62,13 @@ public class ResultActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent =  new Intent(ResultActivity.this, MainActivity.class);
+        intent.putExtra(MainActivity.FRAGMENT_TO_LOAD, "Quiz");
+        startActivity(intent);
+        finish();
+    }
 }
