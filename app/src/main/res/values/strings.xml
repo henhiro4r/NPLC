@@ -28,9 +28,9 @@
     <string name="load">Loading…</string>
     <string name="type">S</string>
     <string name="log_title">Please insert username and password to log in to your account</string>
-    <string name="status_0">You have\'t buy this quiz</string>
+    <string name="status_0">You haven\'t purchased this quiz</string>
     <string name="status_1">You not yet answered this quiz</string>
-    <string name="status_2">You already used all chance to answer this quiz</string>
+    <string name="status_2">You already used all chance to answer</string>
     <string name="status_3">You passed this quiz</string>
     <string name="ne_point">Not Enough Point</string>
     <string name="wrong_quiz">Used all 3 chance to answer</string>
@@ -45,6 +45,7 @@
     <string name="quiz_result">Quiz Result</string>
     <string name="nBadge">0</string>
     <string name="no_history">No History Recorded</string>
+    <string name="post_id">39</string>
     <string name="dummy_question">NyalaKotakPanjangTekanPertanyaan\nNyalaKotakTekanPertanyaan\nNyalaKotakPertanyaan\nKotakPertanyaan\nKotak</string>
     <string name="dummy_text" translatable="false">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
 </resources>
