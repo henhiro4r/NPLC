@@ -2,7 +2,6 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cv_card_quiz"
     android:layout_marginStart="16dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="16dp"
@@ -12,7 +11,6 @@
     app:cardBackgroundColor="@color/colorPeach">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cons_in_cv_card_quiz"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="6dp">

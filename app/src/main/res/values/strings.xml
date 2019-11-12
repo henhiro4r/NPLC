@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">7TH NPLC</string>
-    <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="portal">Portal</string>
     <string name="riwayat">History</string>
     <string name="bantuan">Post List</string>
@@ -14,12 +12,8 @@
     <string name="mulai">Log in</string>
     <string name="nolpertiga">0 / 3</string>
     <string name="portal1">Portal Time Traveller - 1</string>
-    <string name="desp1">Kuiz/Game yang akan kalian hadapi di Portal 1 ini memerlukan kemampuan fokus yang sangat tinggi.</string>
+    <string name="desp1">You must buy this quiz with 500pts!</string>
     <string name="misibelumtuntas">Misi belum tuntas</string>
-    <string name="txt500">500</string>
-    <string name="portal2">Portal Time Traveller - 2</string>
-    <string name="portal3">Portal Time Traveller - 3</string>
-    <string name="portal4">Portal Time Traveller - 4</string>
     <string name="win">WIN</string>
     <string name="lose">LOSE</string>
     <string name="draw">DRAW</string>
@@ -29,21 +23,16 @@
     <string name="hitim">Hi, Tim Challengers</string>
     <string name="postTitle">Post Title</string>
     <string name="postLocation">Post Location</string>
-    <string name="txtnull">-</string>
-    <string name="pos1">POS 01</string>
-    <string name="nkali">0/3</string>
     <string name="txt_username">Username</string>
     <string name="txt_password">Password</string>
     <string name="load">Loading…</string>
     <string name="type">S</string>
     <string name="log_title">Please insert username and password to log in to your account</string>
-    <string name="post_id">39</string>
     <string name="status_0">You have\'t buy this quiz</string>
     <string name="status_1">You not yet answered this quiz</string>
     <string name="status_2">You already used all chance to answer this quiz</string>
     <string name="status_3">You passed this quiz</string>
     <string name="ne_point">Not Enough Point</string>
-    <string name="ald_quiz">You already buy this quiz</string>
     <string name="wrong_quiz">Used all 3 chance to answer</string>
     <string name="question">Question</string>
     <string name="answer">Answer</string>
@@ -56,5 +45,6 @@
     <string name="quiz_result">Quiz Result</string>
     <string name="nBadge">0</string>
     <string name="no_history">No History Recorded</string>
+    <string name="dummy_question">NyalaKotakPanjangTekanPertanyaan\nNyalaKotakTekanPertanyaan\nNyalaKotakPertanyaan\nKotakPertanyaan\nKotak</string>
     <string name="dummy_text" translatable="false">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
 </resources>

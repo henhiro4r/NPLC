@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cons_fr_dashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
@@ -57,7 +56,6 @@
         app:srcCompat="@drawable/wowrack" />
 
     <ScrollView
-        android:id="@+id/sv_fr_dashboard"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/colorPrimary"
@@ -69,7 +67,6 @@
         app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cons_sv_fr_dashboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -104,7 +101,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/txt_nama_tim_fr_dashboard">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cons_cv_fr_dashboard"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/bg">
@@ -215,7 +211,6 @@
                 app:srcCompat="@drawable/ic_refresh_white_24dp" />
 
             <ImageView
-                android:id="@+id/img_play_fr_dashboard"
                 android:layout_width="112dp"
                 android:layout_height="90dp"
                 android:contentDescription="@string/img"
@@ -250,7 +245,6 @@
                 app:srcCompat="@drawable/qrcode" />
 
             <TextView
-                android:id="@+id/txt_main_fr_dashboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"

@@ -70,7 +70,7 @@ public class QuizActivity extends AppCompatActivity{
         toolbar.setTitle("Answer Quiz - " +quiz.getTitle());
         tvTitle.setText(quiz.getTitle());
         if  (quiz.getId().equals("3")){
-            tvQuestion.setText(getString(R.string.dummy_text));
+            tvQuestion.setText(getString(R.string.dummy_question));
             tvQuestion.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
