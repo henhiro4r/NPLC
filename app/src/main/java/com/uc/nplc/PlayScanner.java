@@ -3,6 +3,7 @@ package com.uc.nplc;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -123,6 +124,15 @@ public class PlayScanner extends AppCompatActivity implements ZXingScannerView.R
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent =  new Intent(PlayScanner.this, MainActivity.class);
+        intent.putExtra(MainActivity.FRAGMENT_TO_LOAD, "Home");
+        startActivity(intent);
+        finish();
     }
 
     @Override

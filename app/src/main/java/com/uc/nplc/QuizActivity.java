@@ -137,7 +137,7 @@ public class QuizActivity extends AppCompatActivity{
                     pd.dismiss();
                     break;
                 case "Used all chance" :
-                    finish();
+                    intentBack();
                     showMessage(message);
                     pd.dismiss();
                     break;
@@ -173,6 +173,10 @@ public class QuizActivity extends AppCompatActivity{
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        intentBack();
+    }
+
+    private void intentBack(){
         Intent intent =  new Intent(QuizActivity.this, MainActivity.class);
         intent.putExtra(MainActivity.FRAGMENT_TO_LOAD, "Quiz");
         startActivity(intent);

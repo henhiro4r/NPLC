@@ -161,7 +161,6 @@ public class FragmentPortal extends Fragment {
         Intent intent = new Intent(getActivity(), QuizActivity.class);
         intent.putExtra(QuizActivity.EXTRA_QUIZ, q);
         startActivity(intent);
-        getActivity().finish();
     }
 
     private Observer<Boolean> checkDone = new Observer<Boolean>() {

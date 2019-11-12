@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         if (Objects.equals(getIntent().getStringExtra(FRAGMENT_TO_LOAD), "Quiz")) {
             navigation.setSelectedItemId(R.id.navigation_portal);
+        } else {
+            navigation.setSelectedItemId(R.id.navigation_dashboard);
         }
     }
 
